@@ -4,48 +4,65 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quote of the Minute</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .fade-in { animation: fadeIn 1s ease-in-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        body { 
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+        }
+        .quote-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .fade-in { 
+            animation: fadeIn 1s ease-in-out; 
+        }
+        @keyframes fadeIn { 
+            from { opacity: 0; transform: translateY(20px); } 
+            to { opacity: 1; transform: translateY(0); } 
+        }
     </style>
 </head>
-<body class="bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen flex items-center justify-center">
-    <div class="text-center px-4 max-w-2xl">
+<body class="d-flex align-items-center justify-content-center">
+    <div class="text-center px-4" style="max-width: 800px;">
         <div class="mb-4">
-            <span class="bg-purple-500/20 text-purple-300 px-4 py-1 rounded-full text-sm">Quote of the Minute</span>
+            <span class="badge bg-primary fs-6">Quote of the Minute</span>
         </div>
         
         @if($quote)
-        <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8 md:p-12 shadow-2xl fade-in">
-            <p class="text-2xl md:text-3xl font-light text-white leading-relaxed mb-6">
+        <div class="quote-card fade-in">
+            <p class="fs-3 fw-light text-white mb-4">
                 "{{ $quote->text }}"
             </p>
             @if($quote->author)
-            <p class="text-purple-300 text-lg">— {{ $quote->author }}</p>
+            <p class="text-primary fs-5">— {{ $quote->author }}</p>
             @endif
         </div>
         @else
-        <div class="bg-white/10 backdrop-blur-lg rounded-2xl p-8">
-            <p class="text-white text-xl">Nenhuma quote cadastrada ainda.</p>
+        <div class="quote-card">
+            <p class="text-white fs-5">Nenhuma quote cadastrada ainda.</p>
         </div>
         @endif
 
-        <div class="mt-8 flex items-center justify-center gap-4">
-            <div class="animate-pulse">
-                <span class="text-purple-400 text-sm">Próxima quote em <span id="timer" class="font-bold text-white">60</span>s</span>
-            </div>
+        <div class="mt-4">
+            <span class="text-white-50">
+                Próxima quote em <span id="timer" class="fw-bold text-white">60</span>s
+            </span>
         </div>
 
-        <div class="mt-6">
-            <a href="{{ route('login') }}" class="text-slate-400 hover:text-white text-sm transition">
+        <div class="mt-3">
+            <a href="{{ route('login') }}" class="text-white-50 text-decoration-none">
                 🔐 Área Administrativa
             </a>
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         let seconds = 60;
         const timer = document.getElementById('timer');
