@@ -1,0 +1,9 @@
+.git
+.gitignore
+node_modules
+npm-debug.log
+.env.backup
+.env.production
+/vendor
+/storage/*.key
+storage/*.key
