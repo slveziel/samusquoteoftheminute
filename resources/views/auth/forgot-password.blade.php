@@ -1,6 +1,4 @@
-@extends('layouts.guest')
-
-@section('content')
+<x-guest-layout>
 <form method="POST" action="{{ route('password.email') }}">
     @csrf
 
@@ -20,4 +18,4 @@
         </button>
     </div>
 </form>
-@endsection
+</x-guest-layout>

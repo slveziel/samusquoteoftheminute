@@ -1,6 +1,4 @@
-@extends('layouts.guest')
-
-@section('content')
+<x-guest-layout>
 <form method="POST" action="{{ route('register') }}">
     @csrf
 
@@ -60,4 +58,4 @@
         Já tem conta? Entrar
     </a>
 </div>
-@endsection
+</x-guest-layout>

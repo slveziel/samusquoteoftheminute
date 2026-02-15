@@ -51,7 +51,7 @@
 
         <div class="mt-4">
             <span class="text-white-50">
-                Próxima quote em <span id="timer" class="fw-bold text-white">60</span>s
+                Próxima quote em <span id="timer" class="fw-bold text-white">{{ $secondsUntilNext ?? 60 }}</span>s
             </span>
         </div>
 
@@ -64,7 +64,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        let seconds = 60;
+        let seconds = {{ $secondsUntilNext ?? 60 }};
         const timer = document.getElementById('timer');
         
         setInterval(() => {

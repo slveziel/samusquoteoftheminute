@@ -34,7 +34,22 @@ class QuoteController extends Controller
 
     public function random()
     {
-        $quote = Quote::inRandomOrder()->first();
-        return view('quote', compact('quote'));
+        $quotes = Quote::all();
+        
+        if ($quotes->isEmpty()) {
+            return view('quote', ['quote' => null, 'secondsUntilNext' => 60]);
+        }
+        
+        // Calcular o minuto atual (0-59)
+        $currentMinute = (int) date('i');
+        $currentSecond = (int) date('s');
+        $secondsUntilNext = 60 - $currentSecond;
+        
+        // Usar o minuto atual como índice para seleccionar quote
+        // Assim todos veem a mesma quote no mesmo minuto
+        $quoteIndex = $currentMinute % $quotes->count();
+        $quote = $quotes[$quoteIndex];
+        
+        return view('quote', compact('quote', 'secondsUntilNext'));
     }
 }
